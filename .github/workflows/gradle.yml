@@ -25,6 +25,8 @@ jobs:
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
+        ref: martinbranch # Force l'action à regarder cette branche si besoin
+      
         java-version: '17'
         distribution: 'temurin'
 
@@ -34,6 +36,12 @@ jobs:
       uses: gradle/actions/setup-gradle@v4 # v4.0.0
 
     - name: Build with Gradle Wrapper
+      run: ./gradlew build
+
+    - name: Grant execute permission
+      run: chmod +x gradlew
+
+    - name: Build with Gradle
       run: ./gradlew build
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
